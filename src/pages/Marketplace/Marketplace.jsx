@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as itemAPI from "../../utils/itemAPI";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
 import ItemDisplay from "../../components/ItemDisplay";
+import PageHeader from "../../components/Header/Header"
 
 export default function MarketPlace(props) {
   const [items, setItems] = useState([]);
@@ -50,6 +51,11 @@ export default function MarketPlace(props) {
   return (
     <Grid textAlign="center" style={{ height: "25vh" }} verticalAlign="middle">
       <Grid.Row>
+        <Grid.Column>
+          <PageHeader handleLogout={props.handleLogout} user={props.user} />
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
         <Grid.Column style={{ maxWidth: 450 }}>
           <Segment>
             <Form autoComplete="off" onSubmit={handleSubmit}>
@@ -93,7 +99,7 @@ export default function MarketPlace(props) {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 650 }}>
-          <ItemDisplay items={items} />
+          <ItemDisplay items={items}/>
         </Grid.Column>
       </Grid.Row>
     </Grid>

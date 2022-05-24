@@ -25,6 +25,7 @@ app.use(require("./config/auth"));
 app.use("/api/users", require("./routes/api/users"));
 app.use('/api/stores', require('./routes/api/stores'));
 app.use('/api/marketplace', require('./routes/api/marketplace'));
+app.use('/api/shoppingcart', require('./routes/api/shoppingcart'));
 
 // "catch all" route
 app.get("/*", function (req, res) {

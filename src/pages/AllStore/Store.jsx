@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as storeAPI from "../../utils/storeAPI";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
 import StoreDisplay from "../../components/StoreDisplay";
+import PageHeader from "../../components/Header/Header";
 
 export default function Stores(props) {
   const [stores, setStores] = useState([]);
@@ -47,6 +48,11 @@ export default function Stores(props) {
 
   return (
     <Grid textAlign="center" style={{ height: "25vh" }} verticalAlign="middle">
+      <Grid.Row>
+          <Grid.Column>
+              <PageHeader handleLogout={props.handleLogout} user={props.user}/>
+          </Grid.Column>
+      </Grid.Row>
       <Grid.Row>
         <Grid.Column style={{ maxWidth: 450 }}>
           <Segment>
