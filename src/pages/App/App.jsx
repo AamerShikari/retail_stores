@@ -92,7 +92,7 @@ function App() {
           }
         />
         <Route path="/shoppingcart/:username" element={<ShoppingCart user={user} handleLogout={handleLogout}  />} />
-        <Route path="/marketplace/:item_name" element={<ItemBuy user={user} handleLogout={handleLogout} />} />
+        <Route path="/marketplace/:id" element={<ItemBuy user={user} handleLogout={handleLogout}/>} />
         <Route
           path="/login"
           element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}

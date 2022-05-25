@@ -91,7 +91,7 @@ export default function MarketPlace(props) {
                 onChange={handleFileInput}
               />
               <Button type="submit" className="btn">
-                Create Store!
+                Create Item
               </Button>
             </Form>
           </Segment>

@@ -6,6 +6,7 @@ const upload = multer();
 /*---------- Public Routes ----------*/
 router.get("/", itemCtrl.index);
 router.post('/', upload.single('photo'), itemCtrl.create)
+router.get("/:item_id", itemCtrl.find)
 
 /*---------- Protected Routes ----------*/
 

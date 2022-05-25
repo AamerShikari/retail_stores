@@ -15,14 +15,16 @@ export default function ItemDisplay({ items }) {
     <Card.Group itemsPerRow={numPerCol} stackable>
       {items.map((item) => {
         return (
+
           <Card key={item._id}>
-            {/* <Link to={"/marketplace/" + item.name}> */}
-              <Card.Content onClick={handleClick(item)}>
+            <Link to={"/marketplace/" + item._id}>
+              <Card.Content>
                 <h1>Name: {item.name}</h1>
                 <p>Price: {item.price}</p>
                 <p>Quantity: {item.quantity}</p>
                 <img src={item.photoUrl} width="100px" height="100px" />
               </Card.Content>
+              </Link>
           </Card>
         );
       })}

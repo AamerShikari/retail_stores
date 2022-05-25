@@ -6,6 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 module.exports = {
     index, 
     create,
+    find,
 }
 
 async function index(req, res){
@@ -13,7 +14,7 @@ async function index(req, res){
         // this populates the user when you find the posts
         // so you'll have access to the users information 
         // when you fetch teh posts
-        const items = await Item.find({isPurchased: false}).populate('user').exec()
+        const items = await Item.find({isPurchased: false}).populate('user').populate('store').exec()
         res.status(200).json({items})
     } catch(err){
         console.log(err)
@@ -36,5 +37,14 @@ function create(req, res){
     } catch(err){
         console.log(err)
         res.json({data: err})
+    }
+}
+
+async function find(req, res) {
+    try {
+        const item = await Item.find({_id: req.params.item_id})
+        res.status(200).json({item})
+    } catch(err) {
+        console.log(err)
     }
 }

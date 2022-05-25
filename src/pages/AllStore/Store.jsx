@@ -73,7 +73,7 @@ export default function Stores(props) {
                 onChange={handleFileInput}
               />
               <Button type="submit" className="btn">
-                Create Store!
+                Add Cart
               </Button>
             </Form>
           </Segment>
