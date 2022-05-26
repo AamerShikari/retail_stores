@@ -58,18 +58,20 @@ async function add(req, res) {
         })
         console.log(item, "This it the new Repair Item")
 
-        const newItem = await Item.create({name: item.name+ " :In Cart9", quantity: req.body.quantity, price: item.price, isPurchased: false, photoUrl: item.photoUrl, user: req.user});
+        const newItem = await Item.create({name: item.name+ " :In Cart1", quantity: req.body.quantity, price: item.price, isPurchased: false, photoUrl: item.photoUrl, user: req.user});
         console.log(newItem, "with user")
         cart[0].items.push(newItem);
         cart[0].save(function(err) {
             console.log(err);
         });
 
-        // if(item.quantity === 0){
-        //     Item.findOneAndDelete({id: req.body.item}, function(err){
-        //         console.log(err)
-        //     })
-        // }
+        if(item.quantity <= 0){
+            console.log("OH NO WOAH ")
+            item.isPurchased = true
+            item.save(function(err){
+                console.log(err)
+            })
+        }
         res.status(201).json({cart: cart})
 
     } catch (err) {

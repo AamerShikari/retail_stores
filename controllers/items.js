@@ -14,12 +14,13 @@ async function index(req, res){
         // this populates the user when you find the posts
         // so you'll have access to the users information 
         // when you fetch teh posts
-        const items = await Item.find({isPurchased: false}).populate('user').populate('store').exec()
+        const items = await Item.find({user: undefined}).populate('user').populate('store').exec()
         res.status(200).json({items})
     } catch(err){
         console.log(err)
     }
 }
+
 
 function create(req, res){
     console.log(req.file, 'THIS THE BODY -> ', req.body, 'this is create method', req.user)

@@ -1,4 +1,5 @@
 const Store = require("../models/store");
+const Item = require("../models/item");
 const S3 = require('aws-sdk/clients/s3');
 const s3 = new S3(); // initialize the construcotr
 const { v4: uuidv4 } = require('uuid');
@@ -6,6 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 module.exports = {
     index, 
     create,
+    details
 }
 
 async function index(req, res){
@@ -15,6 +17,18 @@ async function index(req, res){
         // when you fetch teh posts
         const stores = await Store.find({}).populate('user').exec()
         res.status(200).json({stores})
+    } catch(err){
+        console.log(err)
+    }
+}
+
+async function details(req, res){
+    try {
+        // this populates the user when you find the posts
+        // so you'll have access to the users information 
+        // when you fetch teh posts
+        const items = await Item.find({user: req.body.owner}).populate('user').populate('store').exec()
+        res.status(200).json({items})
     } catch(err){
         console.log(err)
     }

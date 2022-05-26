@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createRoutesFromChildren } from "react-router-dom";
-import { Card, Image } from "semantic-ui-react";
+import { Card, Image, Form, Button } from "semantic-ui-react";
 
 export default function ShoppingcartDisplay({ carts }) {
   const numPerCol = 1;
@@ -12,6 +12,16 @@ export default function ShoppingcartDisplay({ carts }) {
       return "Your Shopping Cart";
     }
   }
+  function getCartTotal(cart) {
+    let total = 0;
+    cart.items.forEach((item) => {
+      total += item.quantity * item.price;
+    });
+    return total.toFixed(2);
+  }
+
+  function handleCartPayment(){}
+
   function doSomething() {}
   return (
     <>
@@ -31,11 +41,26 @@ export default function ShoppingcartDisplay({ carts }) {
                   <Card key={item._id}>
                     <Card.Content onClick={doSomething}>
                       <h1>{item.name}</h1>
+                      <h3>Quantity: {item.quantity}</h3>
+                      <h3>Price: {item.price}</h3>
                       <img src={item.photoUrl} width="100px" height="100px" />
+                      <h3>Total: {(item.quantity * item.price).toFixed(2)}</h3>
                     </Card.Content>
                   </Card>
                 );
               })}
+              <h1>Cart Total: {getCartTotal(cart)} </h1>
+              <Form onSubmit={handleCartPayment}>
+                <Button
+                  color="white"
+                  fluid
+                  size="large"
+                  type="submit"
+                  className="btn"
+                >
+                  Settle Up
+                </Button>
+              </Form>
             </Card.Group>
           </>
         );
