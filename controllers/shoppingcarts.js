@@ -1,6 +1,5 @@
 const ShoppingCart = require("../models/shoppingcart");
 const Item = require("../models/item");
-const { ConfigurationServicePlaceholders } = require("aws-sdk/lib/config_service_placeholders");
 
 module.exports = {
     index, 
@@ -13,7 +12,7 @@ async function index(req, res){
         // this populates the user when you find the posts
         // so you'll have access to the users information 
         // when you fetch teh posts
-        const carts = await ShoppingCart.find({user: req.user}).populate('user').populate('shop').exec()
+        const carts = await ShoppingCart.find({user: req.user}).populate('user').populate('shop').populate('items').exec()
         res.status(200).json({carts})
     } catch(err){
         console.log(err)
@@ -44,26 +43,17 @@ async function create(req, res){
 async function add(req, res) {
     console.log(req.body, '<- Body is here!');
     try {
-        let cart;
-        if(req.body.type === "shop"){
-            cart = await ShoppingCart.find({shop: req.body.id}).populate('shop').exec()
-        } else {
-            cart = await ShoppingCart.find({user: req.body.id}).populate('user').exec()
-        }
-        const item = await Item.find({id: req.body.item})
+        const cart = await ShoppingCart.find({_id: req.body.id}).populate('shop').populate('user').populate('items').exec()
+        const item = await Item.findOneAndUpdate({id: req.body.item}, (elem) =>{
+            console.log(Number(elem.quantity) - Number(req.body.quantity), "CHECK ME OUT BITCH")
+            return {quantity: Number(elem.quantity) - Number(req.body.quantity)}
+        })
         console.log(item, "Item old")
-        const newItem = await Item.create({name: item.name+ " : In Cart3", quantity: req.body.quantity, price: item.price, isPurchased: false, photoUrl: item.photoUrl});
-        console.log(req.body.quantity);
-        console.log(typeof(req.body.quantity), "quantity req")
-        console.log(typeof(item[0].quantity), "quantity item")
-        item[0].quantity = item[0].quantity - Number(req.body.quantity);
-        console.log(item[0].quantity)
-        console.log(item, "Item old fixed")
-        // console.log(newItem, "Item new")
-        // console.log(cart, "Carty boi")
-        // cart.items.push(newItem)
-
-        // console.log(cart, "<- value of cart")
+        const newItem = await Item.create({name: item.name+ " :In Cart2", quantity: req.body.quantity, price: item.price, isPurchased: false, photoUrl: item.photoUrl});
+        cart[0].items.push(newItem);
+        cart[0].save(function(err) {
+            console.log(err);
+        });
 
     } catch (err) {
         console.log(err);

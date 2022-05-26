@@ -73,13 +73,13 @@ export default function ItemBuy(props) {
         temp.push({
           key: carts[i]._id,
           text: "Your Shopping Cart",
-          value: { id: carts[i]._id, type: "user" },
+          value: { id: carts[i]._id},
         });
       } else {
         temp.push({
           key: carts[i]._id,
           text: carts[i].shop.name,
-          value: { id: carts[i].shop._id, type: "shop" },
+          value: { id: carts[i]._id},
         });
       }
     }
