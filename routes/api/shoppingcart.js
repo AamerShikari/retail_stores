@@ -5,6 +5,7 @@ const shoppingcartCtrl = require("../../controllers/shoppingcarts");
 router.get("/", shoppingcartCtrl.index);
 router.post('/', shoppingcartCtrl.create)
 router.post('/addItem', shoppingcartCtrl.add)
+router.post('/settle', shoppingcartCtrl.settle)
 
 /*---------- Protected Routes ----------*/
 

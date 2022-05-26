@@ -41,3 +41,17 @@ export function create(cart) {
       throw new Error('Bad Credentials! Check Server Terminal')
     })
   }
+
+  export function adjust(total) {
+    return fetch (BASE_URL + "/settle", {
+      method: "POST", 
+      body: JSON.stringify(total),
+      headers: {
+        'Authorization': 'Bearer ' + tokenService.getToken(),
+        'Content-Type': 'application/json'
+      }
+    }).then(res => {
+      if(res.ok) return res.json();
+      throw new Error('Bad Credentials! CHECK THE SERVER TERMINAL!')
+    })
+  }

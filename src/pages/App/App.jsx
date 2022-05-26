@@ -91,7 +91,7 @@ function App() {
             />
           }
         />
-        <Route path="/shoppingcart/:username" element={<ShoppingCart user={user} handleLogout={handleLogout}  />} />
+        <Route path="/shoppingcart/:username" element={<ShoppingCart user={user} handleLogout={handleLogout} />} />
         <Route path="/marketplace/:id" element={<ItemBuy user={user} handleLogout={handleLogout}/>} />
         <Route
           path="/login"
@@ -121,3 +121,4 @@ function App() {
 }
 
 export default App;
+//https://retail-stores-ams.herokuapp.com/login

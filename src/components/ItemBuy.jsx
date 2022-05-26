@@ -113,7 +113,7 @@ export default function ItemBuy(props) {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            {item.isPurchased ? 
+            {!item.isPurchased ? 
             <Form autoComplete="off" onSubmit={handleAddCart}>
               <Segment stacked>
                 <Dropdown

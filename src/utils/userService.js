@@ -28,6 +28,7 @@ function getUser() {
   return tokenService.getUserFromToken();
 }
 
+
 function logout() {
   tokenService.removeToken();
 }
@@ -45,6 +46,7 @@ function login(creds) {
     })
     .then(({ token }) => tokenService.setToken(token));
 }
+
 
 const userService = {
   signup,

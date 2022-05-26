@@ -36,7 +36,7 @@ export default function ShoppingCart(props) {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <ShoppingcartDisplay carts={carts} />
+            <ShoppingcartDisplay carts={carts} user={props.user}/>
           </Grid.Column>
         </Grid.Row>
       </Grid>

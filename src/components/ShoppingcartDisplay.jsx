@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { createRoutesFromChildren } from "react-router-dom";
 import { Card, Image, Form, Button } from "semantic-ui-react";
+import * as CartAPI from "../utils/ShoppingcartAPI";
 
-export default function ShoppingcartDisplay({ carts }) {
+
+export default function ShoppingcartDisplay({ carts, user}) {
   const numPerCol = 1;
   const numPerCols = 3;
   function getCartName(cart) {
@@ -20,11 +22,16 @@ export default function ShoppingcartDisplay({ carts }) {
     return total.toFixed(2);
   }
 
-  function handleCartPayment(){}
+  function handleCartPayment(total){
+    console.log(total, "RIGHT HERE IS THE TOTAL CALL")
+    CartAPI.adjust({total: total, user: user})
+  }
 
   function doSomething() {}
+
   return (
     <>
+  
       {carts.map((cart) => {
         return (
           <>
@@ -50,7 +57,7 @@ export default function ShoppingcartDisplay({ carts }) {
                 );
               })}
               <h1>Cart Total: {getCartTotal(cart)} </h1>
-              <Form onSubmit={handleCartPayment}>
+              <Form autoComplete="off" onSubmit={handleCartPayment(getCartTotal(cart))}>
                 <Button
                   color="white"
                   fluid

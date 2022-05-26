@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const itemSchema = new mongoose.Schema(
     {
-      name: { type: String, required: true, lowercase: true, unique: true },
+      name: String,
       quantity: Number,
       user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // referencing a model
       store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store'}, // referencing a model

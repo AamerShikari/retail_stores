@@ -24,6 +24,7 @@ export default function SignUpPage(props) {
 
     const formData = new FormData();
     formData.append("photo", selectedFile);
+    formData.append("balance", 0);
 
     for (let fieldName in state) {
       formData.append(fieldName, state[fieldName]);

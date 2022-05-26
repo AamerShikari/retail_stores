@@ -1,10 +1,12 @@
 const ShoppingCart = require("../models/shoppingcart");
 const Item = require("../models/item");
+const User = require("../models/user");
 
 module.exports = {
     index, 
     create,
-    add
+    add, 
+    settle
 }
 
 async function index(req, res){
@@ -50,25 +52,25 @@ async function add(req, res) {
         //     console.log(item, "This is the Item from find")
         // })
         console.log(req.body.item, "Body Item")
-        const item = await Item.findOne({id: req.body.item});
-        console.log(item.quantity, " and ", Number(item.quantity) - Number(req.body.quantity), "Repair Item")
-        item.quantity = Number(item.quantity) - Number(req.body.quantity);
-        item.save(function(err){
-            console.log(err)
-        })
-        console.log(item, "This it the new Repair Item")
+        const item = await Item.find({_id: req.body.item});
+        console.log(item, "I GOTTA KNOW")
+        item[0].quantity = Number(item[0].quantity) - Number(req.body.quantity);
 
-        const newItem = await Item.create({name: item.name+ " :In Cart1", quantity: req.body.quantity, price: item.price, isPurchased: false, photoUrl: item.photoUrl, user: req.user});
+        const newItem = await Item.create({name: item[0].name, quantity: req.body.quantity, price: item[0].price, isPurchased: false, photoUrl: item[0].photoUrl, user: req.user});
         console.log(newItem, "with user")
         cart[0].items.push(newItem);
         cart[0].save(function(err) {
             console.log(err);
         });
 
-        if(item.quantity <= 0){
+        if(item[0].quantity <= 0){
             console.log("OH NO WOAH ")
-            item.isPurchased = true
-            item.save(function(err){
+            item[0].isPurchased = true
+            item[0].save(function(err){
+                console.log(err)
+            })
+        } else {
+            item[0].save(function(err){
                 console.log(err)
             })
         }
@@ -76,5 +78,14 @@ async function add(req, res) {
 
     } catch (err) {
         console.log(err);
+    }
+}
+
+async function settle (req, res) {
+    console.log(req.body, "THIS IS THE BODY OF THE TOTAL FUNCTION")
+    try {
+
+    } catch (err){
+        console.log(err)
     }
 }
