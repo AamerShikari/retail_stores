@@ -12,7 +12,7 @@ export default function ItemBuy(props) {
   const [state, setState] = useState({
     id: "",
     quantity: 0,
-    type: "",
+    item: ""
   });
   const [carts, setCarts] = useState([]);
   const [cartOptions, setCartOptions] = useState([]);
@@ -30,17 +30,15 @@ export default function ItemBuy(props) {
       ...state,
       id: data.value.id,
       type: data.value.type,
+      item: item._id
     });
   };
 
   async function handleAddCart(e) {
     e.preventDefault();
-    console.log(state, "<- State here!!!!!!");
+    
     try {
-        setState({
-            ...state, 
-            item: item._id
-        })
+        console.log(state, "<- State here!!!!!!");
         const data = await CartAPI.addItem(state);
         console.log(data, "Post Addition")
     } catch (err) {
@@ -88,6 +86,7 @@ export default function ItemBuy(props) {
 
   useEffect(() => {
     getItem();
+
     loadCarts();
     loadCartOptions();
   }, [state]);
