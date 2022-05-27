@@ -3,11 +3,15 @@ import * as storeAPI from "../../utils/storeAPI";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
 import StoreDisplay from "../../components/StoreDisplay";
 import PageHeader from "../../components/Header/Header";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Stores(props) {
+  const navigate = useNavigate()
   const [stores, setStores] = useState([]);
   const [selectedFile, setSelectedFile] = useState("");
   const [state, setState] = useState("");
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -18,6 +22,8 @@ export default function Stores(props) {
     props.handleAddStore(formData);
     console.log("STORE CREATED", state);
     // Have to submit the form now! We need a function!
+    setTimeout(() => {  window.location.reload(false); }, 500);
+    
   }
 
   function handleFileInput(e) {

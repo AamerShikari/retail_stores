@@ -9,7 +9,7 @@ const upload = multer();
 router.get("/", storeCtrl.index);
 router.post('/', upload.single('photo'), storeCtrl.create)
 router.get("/:store_id/main", storeCtrl.details);
-router.post('/:store_id/:item_id', itemCtrl.find)
+router.post('/marketplace/store/:store_id', itemCtrl.storeFind)
 
 /*---------- Protected Routes ----------*/
 

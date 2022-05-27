@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createRoutesFromChildren } from "react-router-dom";
 import { Card, Image, Form, Button } from "semantic-ui-react";
 import * as CartAPI from "../utils/ShoppingcartAPI";
+import { Link } from "react-router-dom";
 
 
 export default function ShoppingcartDisplay({ carts, user}) {
+  const [shopCarts, setShopCarts] = useState([])
   const numPerCol = 1;
   const numPerCols = 3;
+
   function getCartName(cart) {
     if (cart.shop) {
       return cart.shop.name;
@@ -14,6 +17,7 @@ export default function ShoppingcartDisplay({ carts, user}) {
       return "Your Shopping Cart";
     }
   }
+
   function getCartTotal(cart) {
     let total = 0;
     cart.items.forEach((item) => {
@@ -22,10 +26,21 @@ export default function ShoppingcartDisplay({ carts, user}) {
     return total.toFixed(2);
   }
 
-  function handleCartPayment(total){
-    console.log(total, "RIGHT HERE IS THE TOTAL CALL")
-    CartAPI.adjust({total: total, user: user})
+  function handleCartPayment(total, cartName, cart){
+    console.log("fuck")
+    // console.log(total, "RIGHT HERE IS THE TOTAL CALL")
+    // console.log(cartName, "RIGHT HERE IS THE CartName Cart")
+    // console.log(cart, "RIGHT HERE IS THE cart value")
+    // let userCart = false;
+    // if (cartName === "Your Shopping Cart") {
+    //   userCart = true;
+    // } 
+    // CartAPI.adjust({total: total, user: user, cart: cart, isUser: userCart})
   }
+
+  useEffect(() => {
+
+  }, [])
 
   function doSomething() {}
 
@@ -37,9 +52,11 @@ export default function ShoppingcartDisplay({ carts, user}) {
           <>
             <Card.Group itemsPerRow={numPerCol} stackable>
               <Card key={cart._id}>
+                <Link to={"/Shoppingcart/display/" + cart._id}>
                 <Card.Header>
                   <h1>{getCartName(cart)}</h1>
                 </Card.Header>
+                </Link>
               </Card>
             </Card.Group>
             <Card.Group itemsPerRow={numPerCols} stackable>
@@ -57,17 +74,7 @@ export default function ShoppingcartDisplay({ carts, user}) {
                 );
               })}
               <h1>Cart Total: {getCartTotal(cart)} </h1>
-              <Form autoComplete="off" onSubmit={handleCartPayment(getCartTotal(cart))}>
-                <Button
-                  color="white"
-                  fluid
-                  size="large"
-                  type="submit"
-                  className="btn"
-                >
-                  Settle Up
-                </Button>
-              </Form>
+              {/* <button key={cart._id} onClick={handleCartPayment(getCartTotal(cart), getCartName(cart), cart)}>Settle</button> */}
             </Card.Group>
           </>
         );

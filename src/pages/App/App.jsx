@@ -11,6 +11,8 @@ import * as storeAPI from "../../utils/storeAPI";
 import * as itemAPI from "../../utils/itemAPI";
 import * as CartAPI from "../../utils/ShoppingcartAPI";
 import ItemBuy from "../../components/ItemBuy";
+import StorePage from "../StorePage/StorePage";
+import OneCart from "../../components/OneCart";
 
 function App() {
   const [user, setUser] = useState(userService.getUser()); // getUser decodes our JWT token, into a javascript object
@@ -36,7 +38,7 @@ function App() {
       // the server, we then want to set it in state
       console.log(data, " this is response from the server, in handleAddPost");
       setStores([data.store, ...stores]);
-      handleAddCart({shop: data.store})
+      handleAddCart({ shop: data.store });
     } catch (err) {
       console.log(err);
     }
@@ -54,18 +56,17 @@ function App() {
     }
   }
 
-  async function handleAddCart(cart){
-    console.log(cart, "THE CART IS BEING CALLED HERE") 
+  async function handleAddCart(cart) {
+    console.log(cart, "THE CART IS BEING CALLED HERE");
     try {
       const data = await CartAPI.create(cart);
-      console.log(data.cart, "this is the cart itself")
-      setCarts([data.cart, ...carts])
-      console.log(carts)
-    } catch (err){
+      console.log(data.cart, "this is the cart itself");
+      setCarts([data.cart, ...carts]);
+      console.log(carts);
+    } catch (err) {
       console.log(err);
     }
   }
-
 
 
   if (user) {
@@ -91,15 +92,39 @@ function App() {
             />
           }
         />
-        <Route path="/shoppingcart/:username" element={<ShoppingCart user={user} handleLogout={handleLogout} />} />
-        <Route path="/marketplace/:id" element={<ItemBuy user={user} handleLogout={handleLogout}/>} />
+        <Route
+          path="/shoppingcart/:username"
+          element={<ShoppingCart user={user} handleLogout={handleLogout} />}
+        />
+        <Route
+          path="/marketplace/:id"
+          element={<ItemBuy user={user} handleLogout={handleLogout} />}
+        />
+        <Route
+          path="/store/:id"
+          element={<StorePage user={user} handleLogout={handleLogout} />}
+        />
+        <Route
+          path="/shoppingcart/display/:id"
+          element={
+            <OneCart
+              user={user}
+              handleLogout={handleLogout}
+            />
+          }
+        />
         <Route
           path="/login"
           element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
         />
         <Route
           path="/signup"
-          element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} handleAddCart={handleAddCart} />}
+          element={
+            <SignupPage
+              handleSignUpOrLogin={handleSignUpOrLogin}
+              handleAddCart={handleAddCart}
+            />
+          }
         />
       </Routes>
     );
@@ -113,7 +138,12 @@ function App() {
       />
       <Route
         path="/signup"
-        element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} handleAddCart={handleAddCart}/>}
+        element={
+          <SignupPage
+            handleSignUpOrLogin={handleSignUpOrLogin}
+            handleAddCart={handleAddCart}
+          />
+        }
       />
       <Route path="/*" element={<Navigate to="/login" />} />
     </Routes>

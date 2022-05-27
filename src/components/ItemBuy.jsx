@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Card, Image } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import { Button, Form, Grid, Segment, Dropdown } from "semantic-ui-react";
 import PageHeader from "./Header/Header";
 import * as itemAPI from "../utils/itemAPI";
 import * as CartAPI from "../utils/ShoppingcartAPI";
+import { useNavigate } from "react-router-dom";
 
 export default function ItemBuy(props) {
   let { id } = useParams();
   const [item, setItem] = useState({});
+  const navigate = useNavigate()
   const [state, setState] = useState({
     id: "",
     quantity: 0,
@@ -41,9 +43,11 @@ export default function ItemBuy(props) {
         console.log(state, "<- State here!!!!!!");
         const data = await CartAPI.addItem(state);
         console.log(data, "Post Addition")
+        setTimeout(() => {  navigate("/marketplace")}, 500);
     } catch (err) {
       console.log(err);
     }
+    
   }
 
   async function getItem() {
@@ -86,7 +90,6 @@ export default function ItemBuy(props) {
 
   useEffect(() => {
     getItem();
-
     loadCarts();
     loadCartOptions();
   }, [state]);

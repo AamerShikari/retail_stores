@@ -41,3 +41,17 @@ export function create(item) {
           throw new Error('Bad Credentials! Check the Server Terminal!')
       })
   }
+
+  export function getFromStore(store) {
+      return fetch(BASE_URL + "/store/" + store.id,{
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + tokenService.getToken(),
+            'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+        if(res.ok) return res.json();
+        throw new Error('Bad Credentials! Check the Server Terminal!')
+    })
+  }

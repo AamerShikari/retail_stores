@@ -20,6 +20,7 @@ export default function MarketPlace(props) {
     props.handleAddItem(formData);
     console.log("Item CREATED", state);
     // Have to submit the form now! We need a function!
+    setTimeout(() => {  window.location.reload(false); }, 500);
   }
 
   function handleFileInput(e) {

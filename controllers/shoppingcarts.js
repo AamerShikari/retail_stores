@@ -82,9 +82,9 @@ async function add(req, res) {
 }
 
 async function settle (req, res) {
-    console.log(req.body, "THIS IS THE BODY OF THE TOTAL FUNCTION")
+    console.log(req.body, "THIS IS THE BODY OF THE TOTAL FUNCTION, Look at me")
     try {
-
+        // const cart = await ShoppingCart.find({_id: req.}).populate('shop').populate('user').populate('items').exec()
     } catch (err){
         console.log(err)
     }

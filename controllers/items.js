@@ -7,6 +7,7 @@ module.exports = {
     index, 
     create,
     find,
+    storeFind
 }
 
 async function index(req, res){
@@ -46,6 +47,16 @@ async function find(req, res) {
         const item = await Item.find({_id: req.params.item_id})
         res.status(200).json({item})
     } catch(err) {
+        console.log(err)
+    }
+}
+
+async function storeFind(req, res) {
+    try {
+        console.log(req.params)
+        // const items = await Item.find({user: req.params}).populate('user').populate('store').exec()
+        // res.status(200).json({items})
+    } catch (err) {
         console.log(err)
     }
 }
