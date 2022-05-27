@@ -3,7 +3,6 @@
 <p> This application mimics the role that shopify plays to individual store owners and creators. Users are able to create stores and edit the
 content that each store contains. </p>
 
-<h2> Here's a Sneak Peak </h2>
 <h3> Login Page </h3>
 <img src="ReadMePics/Login.png"
      alt="Login Page" />
