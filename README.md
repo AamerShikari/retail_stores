@@ -5,22 +5,25 @@ content that each store contains. </p>
 
 <h2> Here's a Sneak Peak </h2>
 <h3> Login Page </h3>
-<img src="ReadMePics/HomePage.png"
+<img src="ReadMePics/Login.png"
      alt="Login Page" />
 <h3> All Stores Page </h3>
-<img src="ReadMePics/AllPlaylists.png"
+<img src="ReadMePics/Stores.png"
      alt="All Stores" />
 <h3> MarketPlace! </h3>
- <img src="ReadMePics/AllSongs.png"
+ <img src="ReadMePics/MarketPlace.png"
      alt="Marketplace" />
  <h3> Example Shopping Cart </h3>
-  <img src="ReadMePics/AllSongs.png"
+  <img src="ReadMePics/ShoppingCart.png"
      alt="Shopping Cart" />
      
 
 <h2> Data Model </h2>
-<img src="ReadMePics/ERDGraph.png"
+<img src="ReadMePics/ERD.png"
      alt="ERD Graph" />
+<h2> WireFrame </h2> 
+<img src="ReadMePics/WireFrame.png"
+     alt="WireFrame" />
      
 <h2> Routes </h2>
      
