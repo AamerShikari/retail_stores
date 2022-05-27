@@ -28,7 +28,7 @@ content that each store contains. </p>
 <h2> Routes </h2>
      
      
-Technologies Used: JavaScript, Html, Css, React.js, Express, MongooseDB
+Technologies Used: JavaScript, Html, Css, React.js, Express.js, Node.js, AWS, Semantic-UI, Atlas, Heroku, JSON WebToken Authentication, MongooseDB
 
 Deployed On Heroku
 Here's The Link!
